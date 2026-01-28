@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Base: dark-friendly palette, reading-first typography.
+ * Body uses ink background and parchment text for a book-like feel.
+ *
+ * Theme: Default = DARK (unchanged). Light theme applied when html has class "light".
+ * Tailwind colors resolve from CSS variables below; .light overrides for light mode.
+ */
+@layer base {
+  /* Dark theme (default) – existing design, unchanged */
+  :root {
+    --bg-page: #0d0c0b;
+    --bg-card: #1a1816;
+    --bg-input: #292524;
+    --text-primary: #faf8f5;
+    --text-muted: #a8a29e;
+    --text-subtle: #57534e;
+    --border-default: #44403c;
+    --accent: #b45309;
+    --accent-hover: #d97706;
+    --accent-muted: rgba(180, 83, 9, 0.15);
+    /* Tailwind palette – same values, for var() in config */
+    --ink-950: #0d0c0b;
+    --ink-900: #1a1816;
+    --ink-800: #292524;
+    --ink-700: #44403c;
+    --ink-600: #57534e;
+    --ink-500: #78716c;
+    --ink-400: #a8a29e;
+    --parchment-100: #faf8f5;
+    --parchment-200: #f5f0e8;
+    --parchment-300: #ebe4d9;
+    --parchment-400: #d4c9b8;
+    --accent-default: #b45309;
+    --accent-light: #d97706;
+    --accent-dark: #92400e;
+    --accent-muted-rgba: rgba(180, 83, 9, 0.15);
+  }
+
+  /* Light theme – clean, readable, professional; same typography/spacing as dark */
+  html.light {
+    --bg-page: #f5f0e8;
+    --bg-card: #ebe4d9;
+    --bg-input: #e0d9cd;
+    --text-primary: #1a1816;
+    --text-muted: #57534e;
+    --text-subtle: #78716c;
+    --border-default: #c9bfae;
+    --accent: #b45309;
+    --accent-hover: #92400e;
+    --accent-muted: rgba(180, 83, 9, 0.12);
+    --ink-950: #f5f0e8;
+    --ink-900: #ebe4d9;
+    --ink-800: #e0d9cd;
+    --ink-700: #c9bfae;
+    --ink-600: #b5a99a;
+    --ink-500: #78716c;
+    --ink-400: #57534e;
+    --parchment-100: #1a1816;
+    --parchment-200: #292524;
+    --parchment-300: #44403c;
+    --parchment-400: #57534e;
+    --accent-default: #b45309;
+    --accent-light: #92400e;
+    --accent-dark: #78350f;
+    --accent-muted-rgba: rgba(180, 83, 9, 0.12);
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-ink-950 text-parchment-100 antialiased font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Focus visible for accessibility: subtle ring (raw CSS – accent/50 not generated for var() colors) */
+  :focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px var(--ink-900),
+      0 0 0 4px color-mix(in srgb, var(--accent-default) 50%, transparent);
+  }
+
+  /* Selection color matches theme (raw CSS – accent/25 not generated for var() colors) */
+  ::selection {
+    background-color: color-mix(in srgb, var(--accent-default) 25%, transparent);
+    color: var(--parchment-100);
+  }
+}
+
+/**
+ * Reader content: serif, constrained width, comfortable line height.
+ * Used for generated story chapters only (not UI labels).
+ */
+@layer components {
+  .reader-prose {
+    @apply font-serif text-reader max-w-reader;
+    @apply text-parchment-200 leading-relaxed;
+  }
+
+  .reader-prose p {
+    @apply mb-5 last:mb-0;
+  }
+
+  .reader-prose p:first-of-type::first-letter {
+    @apply float-left text-4xl font-serif mr-2 mt-0.5 text-accent-light;
+    font-weight: 400;
+  }
+
+  /* Chapter divider: subtle rule, not a heavy HR */
+  .chapter-divider {
+    @apply border-t border-ink-700 my-10;
+  }
+
+  .chapter-title {
+    @apply font-serif text-2xl font-semibold text-parchment-100 tracking-tight mt-12 mb-4;
+  }
+}
+
+/* Utility: hide scrollbar but keep scroll */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
