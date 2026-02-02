@@ -12,15 +12,16 @@ export interface AuthUser {
 
 async function jsonFetch<T>(
   path: string,
-  options: RequestInit & { body?: Record<string, unknown> } = {}
+  options: Omit<RequestInit, "body"> & { body?: Record<string, unknown> } = {}
 ): Promise<{ data?: T; error?: string; status: number }> {
   const { body, ...init } = options;
-  const res = await fetch(`${BASE}${path}`, {
+  const fetchOptions: RequestInit = {
     ...init,
     credentials: "include",
     headers: { "Content-Type": "application/json", ...init.headers },
     ...(body != null && { body: JSON.stringify(body) }),
-  });
+  };
+  const res = await fetch(`${BASE}${path}`, fetchOptions);
   const data = await res.json().catch(() => ({}));
   const error = (data as { error?: string }).error ?? (data as { message?: string }).message;
   return { data: data as T, error, status: res.status };

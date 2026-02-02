@@ -1,9 +1,12 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+import { NextResponse } from "next/dist/server/web/spec-extension/response";
 import { dbConnect } from "@/lib/db/mongodb";
 import { User } from "@/lib/db/schemas/user";
 import { verifyToken } from "@/lib/auth/jwt";
 import { AUTH_COOKIE_NAME } from "@/lib/auth/cookies";
 import { isAuthConfigError } from "@/lib/auth/env";
+
+export const dynamic = "force-dynamic";
 
 /** GET /api/auth/me — return current user from JWT cookie (no password). */
 export async function GET(request: NextRequest) {
@@ -18,9 +21,9 @@ export async function GET(request: NextRequest) {
     }
 
     await dbConnect();
-    const user = await User.findById(payload.sub)
+    const user = (await User.findById(payload.sub)
       .select("email createdAt _id")
-      .lean();
+      .lean()) as { _id: { toString(): string }; email: string; createdAt: Date } | null;
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 401 });
     }

@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+import { NextResponse } from "next/dist/server/web/spec-extension/response";
 import bcrypt from "bcryptjs";
 import { dbConnect } from "@/lib/db/mongodb";
 import { User } from "@/lib/db/schemas/user";
@@ -25,7 +26,12 @@ export async function POST(request: NextRequest) {
 
     await dbConnect();
 
-    const user = await User.findOne({ email }).select("password _id email createdAt").lean();
+    const user = (await User.findOne({ email }).select("password _id email createdAt").lean()) as {
+      password: string;
+      _id: { toString(): string };
+      email: string;
+      createdAt: Date;
+    } | null;
     const hashToCompare = user?.password ?? DUMMY_HASH;
     const valid = await bcrypt.compare(password, hashToCompare);
     if (!user || !valid) {

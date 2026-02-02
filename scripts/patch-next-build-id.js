@@ -9,7 +9,7 @@ const path = require("path");
 function main() {
   const file = path.join(
     __dirname,
-    "../node_modules/next/dist/build/generate-build-id.js",
+    "../node_modules/next/dist/build/generate-build-id.js"
   );
 
   if (!fs.existsSync(file)) return;
@@ -19,12 +19,12 @@ function main() {
 
   const patched = code
     .replace(
-      /let buildId = await generate\(\);/,
-      'let buildId = typeof generate === "function" ? await generate() : null;',
+      /let buildId = await generate\(\)\s*;/,
+      'let buildId = typeof generate === "function" ? await generate() : null;'
     )
     .replace(
       /if \(buildId === null\) \{/,
-      "if (buildId === null || buildId === undefined) {",
+      "if (buildId === null || buildId === undefined) {"
     );
   if (patched !== code) fs.writeFileSync(file, patched);
 }

@@ -16,6 +16,8 @@ function isValidFormat(s: string): s is ExportFormat {
   return VALID_FORMATS.includes(s as ExportFormat);
 }
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -58,7 +60,7 @@ export async function GET(request: Request) {
     const result = await exportStory(payload, format);
 
     const filename = encodeURIComponent(result.suggestedFilename);
-    return new Response(result.buffer, {
+    return new Response(new Uint8Array(result.buffer), {
       status: 200,
       headers: {
         "Content-Type": result.mimeType,

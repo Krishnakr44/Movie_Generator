@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter, Crimson_Pro } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ThemeProvider } from "@/lib/theme";
@@ -16,19 +15,6 @@ const THEME_SCRIPT = `
 })();
 `;
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-});
-
-const crimson = Crimson_Pro({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  variable: "--font-crimson",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   title: "Fiction Movie – AI-Powered Indian Fiction",
   description:
@@ -41,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${crimson.variable}`} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen font-sans antialiased flex flex-col" suppressHydrationWarning>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
         <ThemeProvider>

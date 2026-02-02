@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+import { NextResponse } from "next/dist/server/web/spec-extension/response";
 import bcrypt from "bcryptjs";
 import { dbConnect } from "@/lib/db/mongodb";
 import { User } from "@/lib/db/schemas/user";
@@ -38,8 +39,9 @@ export async function POST(request: NextRequest) {
     }
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+    const userId = (user as { _id: unknown })._id;
     await User.updateOne(
-      { _id: user._id },
+      { _id: userId },
       {
         $set: { password: hashedPassword },
         $unset: { resetPasswordToken: 1, resetPasswordExpires: 1 },

@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+import { NextResponse } from "next/dist/server/web/spec-extension/response";
 import bcrypt from "bcryptjs";
 import { dbConnect } from "@/lib/db/mongodb";
 import { User } from "@/lib/db/schemas/user";

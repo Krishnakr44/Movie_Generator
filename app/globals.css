@@ -12,6 +12,8 @@
 @layer base {
   /* Dark theme (default) – existing design, unchanged */
   :root {
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-crimson: Georgia, Cambria, "Times New Roman", serif;
     --bg-page: #0d0c0b;
     --bg-card: #1a1816;
     --bg-input: #292524;

@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from "next/dist/server/web/spec-extension/response";
 import type { NextRequest } from "next/server";
 import { getAuthCookieFromHeader, buildClearAuthCookie } from "@/lib/auth/cookies";
 import { verifyToken } from "@/lib/auth/jwt";

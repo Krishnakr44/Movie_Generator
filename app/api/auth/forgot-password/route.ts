@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+import { NextResponse } from "next/dist/server/web/spec-extension/response";
 import { dbConnect } from "@/lib/db/mongodb";
 import { User } from "@/lib/db/schemas/user";
 import { forgotPasswordSchema } from "@/lib/auth/validate";
@@ -29,8 +30,9 @@ export async function POST(request: NextRequest) {
 
     const { token, hashed } = generateResetToken();
     const expires = new Date(Date.now() + RESET_EXPIRY_MS);
+    const userId = (user as { _id: unknown })._id;
     await User.updateOne(
-      { _id: user._id },
+      { _id: userId },
       { $set: { resetPasswordToken: hashed, resetPasswordExpires: expires } }
     );
 
