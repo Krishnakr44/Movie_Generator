@@ -4,7 +4,7 @@ import { ContactFormPlaceholder } from "@/components/ContactFormPlaceholder";
  * Contact Us – simple layout with email and optional form UI only.
  * No backend submission; accessible and mobile-friendly.
  */
-const CONTACT_EMAIL = "m87.krishna@gmail.com";
+const CONTACT_EMAIL = "echoesfantasy@gmail.com";
 
 export default function ContactPage() {
   return (

@@ -3,7 +3,7 @@
 /**
  * Contact form UI only – no backend. Prevents default submit in client.
  */
-const CONTACT_EMAIL = "m87.krishna@gmail.com";
+const CONTACT_EMAIL = "echoesfantasy@gmail.com";
 
 export function ContactFormPlaceholder() {
   return (

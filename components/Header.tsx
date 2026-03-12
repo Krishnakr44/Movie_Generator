@@ -46,9 +46,9 @@ export function Header() {
         <Link
           href="/"
           className="font-display text-lg font-semibold tracking-tight text-parchment-100 transition-colors hover:text-accent-light sm:text-xl"
-          aria-label="Fiction Movie – Home"
+          aria-label="Echoes Of Fantasy – Home"
         >
-          Fiction Movie
+          Echoes Of Fantasy
         </Link>
 
         {/* Desktop nav */}

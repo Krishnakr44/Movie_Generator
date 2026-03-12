@@ -8,7 +8,7 @@ const NAV_LINKS = [
   { href: "/contact", label: "Contact" },
 ] as const;
 
-const CONTACT_EMAIL = "m87.krishna@gmail.com";
+const CONTACT_EMAIL = "echoesfantasy@gmail.com";
 
 /** Simple mail icon – no external dependency */
 function MailIcon() {
@@ -43,7 +43,7 @@ export function Footer() {
               href="/"
               className="inline-block font-display text-xl font-semibold tracking-tight text-parchment-100 transition-colors hover:text-accent-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-900 rounded"
             >
-              Fiction Movie
+              Echoes Of Fantasy
             </Link>
             <p className="mt-3 text-sm leading-relaxed text-ink-400 max-w-sm">
               AI-powered Indian fiction. You set the rules; we help you tell the story.
@@ -92,7 +92,7 @@ export function Footer() {
         {/* Bottom bar: copyright + back to top */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-ink-700/60 pt-8 sm:flex-row">
           <p className="text-xs text-ink-500 order-2 sm:order-1">
-            © {currentYear} Fiction Movie. All rights reserved.
+            © {currentYear} Echoes Of Fantasy. All rights reserved.
           </p>
           <span className="order-1 sm:order-2">
             <BackToTop />
